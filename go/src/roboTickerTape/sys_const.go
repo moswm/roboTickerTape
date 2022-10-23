@@ -32,13 +32,13 @@ const (
 	prodname		= "roboTickerTape"
 	myhost			= "baev.one"
 	myhostidn		= myhost
-	myurl			= "https://"+myhost+"/"
+	myurl			= "https://"+myho'st+"/"
 	myurlidn		= "https://"+myhostidn+"/"
 	myemail			= "...@..."
-	smalltitle		= "roboTickerTape (rTT)"
+	smalltitle		= "roboTickerTape"
 )
 
 //pages
 var pg_title = map[string]string{
-	"/":				"roboTickerTape (rTT) aggregates and caches ticker tapes from exchanges",
+	"/":				"roboTickerTape aggregates and caches ticker tapes from exchanges",
 	"privacy_policy":	"Privacy Policy"}
