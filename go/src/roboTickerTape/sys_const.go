@@ -32,7 +32,7 @@ const (
 	prodname		= "roboTickerTape"
 	myhost			= "baev.one"
 	myhostidn		= myhost
-	myurl			= "https://"+myho'st+"/"
+	myurl			= "https://"+myhost+"/"
 	myurlidn		= "https://"+myhostidn+"/"
 	myemail			= "...@..."
 	smalltitle		= "roboTickerTape"
