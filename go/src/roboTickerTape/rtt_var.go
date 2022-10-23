@@ -16,29 +16,13 @@
 
 package main
 
-const (
-	//system
-	www_path		= "/var/www/"
-	proj_dir		= "roboTickerTape"
-	rqkey_path		= www_path
-	tpl_path		= www_path+"go/src/"+proj_dir+"/tpl/"
-	static_path		= www_path+"static/"
-	//ssl
-	ssl_cert		= www_path+"ssl/cert.pem"
-	ssl_key			= www_path+"ssl/key.pem"
-	//main
-	copyright		= "Copyright (C) 2022 Baev"
-	author			= "Baev"
-	prodname		= "roboTickerTape"
-	myhost			= "baev.one"
-	myhostidn		= myhost
-	myurl			= "https://"+myhost+"/"
-	myurlidn		= "https://"+myhostidn+"/"
-	myemail			= "...@..."
-	smalltitle		= "roboTickerTape"
-)
+var rtt_vExNm =map[string]string{
+	"CEX":	"CoinEx",
+	"BTX":	"Bittrex",
+	"PLX":	"Poloniex"}
 
-//pages
-var pg_title = map[string]string{
-	"/":				"roboTickerTape / Aggregates and caches ticker tapes from exchanges",
-	"privacy_policy":	"Privacy Policy"}
+var rtt_vExUrl =map[string]string{
+	"CEX":	"https://api.coinex.com/v1/market/ticker/all",
+	"BTXt":	"https://api.bittrex.com/v3/markets/tickers",
+	"BTXs":	"https://api.bittrex.com/v3/markets/summaries",
+	"PLX":	"https://poloniex.com/public?command=returnTicker"}
