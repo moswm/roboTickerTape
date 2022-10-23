@@ -1,4 +1,4 @@
 # roboTickerTape
 
-roboTickerTape (rTT) aggregates and caches ticker tapes from exchanges
+roboTickerTape aggregates and caches ticker tapes from exchanges
 
