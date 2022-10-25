@@ -16,3 +16,43 @@
 
 package main
 
+import (
+	"net/http"
+	"time"
+	"fmt"
+)
+
+type rChEx struct {
+	ex string
+	resp *http.Response
+}
+
+func getWr(ex string,ul string,r chan rChEx) {
+	t_out:=time.After(10*time.Second)
+	select {
+	default:
+		if resp,err:=http.Get(ul); err==nil {
+			r<-rChEx{ex,resp}
+		} else {
+			fmt.Println("getWr - request error", err.Error())
+		}
+	case <-t_out:
+		return
+	}
+}
+
+func getEx(ex string,tm int,ul string) {
+	ch:=make(chan rChEx)
+	for {
+		go getWr(ex,ul,ch)
+		time.Sleep(time.Duration(tm)*time.Second)
+		rTTparse(ch)
+	}
+}
+
+func rTTmain() {
+	//chPbl=make(chan string,len(rtt_vExNm))
+	for ex,_:=range rtt_vExUrl {
+		go getEx(ex,rtt_vExTm[ex],rtt_vExUrl[ex])
+	}
+}

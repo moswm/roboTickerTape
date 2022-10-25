@@ -16,19 +16,15 @@
 
 package main
 
-var rtt_vExNm =map[string]string{
-	"CEX":	"CoinEx",
-	"BTX":	"Bittrex",
-	"PLX":	"Poloniex"}
+import (
+	"fmt"
+	"io/ioutil"
+)
 
-var rtt_vExUrl =map[string]string{
-	"CEX":	"https://api.coinex.com/v1/market/ticker/all",
-	"BTXt":	"https://api.bittrex.com/v3/markets/tickers",
-	"BTXs":	"https://api.bittrex.com/v3/markets/summaries",
-	"PLX":	"https://poloniex.com/public?command=returnTicker"}
-
-var rtt_vExTm =map[string]int{
-	"CEX":	2,
-	"BTXt":	2,
-	"BTXs":	2,
-	"PLX":	3}
+func rTTparse_CEX(bdy []byte) {
+	//test ---
+	if ioutil.WriteFile(www_path+"rTT/ex_CEX_data",bdy,0644) == nil {
+		fmt.Println ("File written successfully: ex_CEX_data")
+	}
+	//--------
+}

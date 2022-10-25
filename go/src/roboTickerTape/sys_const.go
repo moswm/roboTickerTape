@@ -18,7 +18,9 @@ package main
 
 const (
 	//system
+//WORK:
 	www_path		= "/var/www/"
+// ====
 	proj_dir		= "roboTickerTape"
 	rqkey_path		= www_path
 	tpl_path		= www_path+"go/src/"+proj_dir+"/tpl/"

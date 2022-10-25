@@ -16,19 +16,20 @@
 
 package main
 
-var rtt_vExNm =map[string]string{
-	"CEX":	"CoinEx",
-	"BTX":	"Bittrex",
-	"PLX":	"Poloniex"}
+import (
+	"fmt"
+	"io/ioutil"
+)
 
-var rtt_vExUrl =map[string]string{
-	"CEX":	"https://api.coinex.com/v1/market/ticker/all",
-	"BTXt":	"https://api.bittrex.com/v3/markets/tickers",
-	"BTXs":	"https://api.bittrex.com/v3/markets/summaries",
-	"PLX":	"https://poloniex.com/public?command=returnTicker"}
-
-var rtt_vExTm =map[string]int{
-	"CEX":	2,
-	"BTXt":	2,
-	"BTXs":	2,
-	"PLX":	3}
+func rTTparse(ch chan rChEx) {
+	dt:=<-ch
+	defer dt.resp.Body.Close()
+    if bdy,err:=ioutil.ReadAll(dt.resp.Body); err==nil {
+		if dt.ex=="CEX" { rTTparse_CEX(bdy) }
+		//if dt.ex=="BTXt" {}
+		//if dt.ex=="BTXs" {}
+		//if dt.ex=="PLX" {}
+	} else {
+        fmt.Println("rTTparse - response error", err.Error())
+    }
+}

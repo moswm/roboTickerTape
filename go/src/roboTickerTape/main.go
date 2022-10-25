@@ -19,17 +19,34 @@ package main
 import (
 	"net/http"
 	"log"
+	"os"
 )
 
+func dirCorrect() {
+	if _,err:=os.Stat(www_path+"rTT"); os.IsNotExist(err) {
+		if err2:=os.Mkdir(www_path+"rTT",0755); err2!=nil { log.Fatal(err2) }
+	}
+}
+
 func main() {
+
+	dirCorrect()
 
 	mux5001:=http.NewServeMux()
 	mux5001.HandleFunc("/",hdl_5001)
 	fs:=http.FileServer(http.Dir(static_path))
 	mux5001.Handle("/"+proj_dir+"/",http.StripPrefix("/",fs))
 
-	go func() { log.Fatal(http.ListenAndServeTLS(":5001",ssl_cert,ssl_key,mux5001)) }()
-	//go func() { log.Fatal(http.ListenAndServe(":5001",mux5001)) }()
+	go rTTmain()
+
+	ssl_en:=false
+	if _,err:=os.Stat(ssl_cert); err==nil {ssl_en=true}
+	if ssl_en {
+		go func() { log.Fatal(http.ListenAndServeTLS(":5001",ssl_cert,ssl_key,mux5001)) }()
+	} else {
+		go func() { log.Fatal(http.ListenAndServe(":5001",mux5001)) }()
+	}
+
 	select {}
 
 }
