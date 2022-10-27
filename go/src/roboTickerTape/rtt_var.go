@@ -16,19 +16,21 @@
 
 package main
 
-var rtt_vExNm =map[string]string{
+var rtt_vExNm=map[string]string{
 	"CEX":	"CoinEx",
 	"BTX":	"Bittrex",
 	"PLX":	"Poloniex"}
 
-var rtt_vExUrl =map[string]string{
+var rtt_vExUrl=map[string]string{
 	"CEX":	"https://api.coinex.com/v1/market/ticker/all",
 	"BTXt":	"https://api.bittrex.com/v3/markets/tickers",
 	"BTXs":	"https://api.bittrex.com/v3/markets/summaries",
 	"PLX":	"https://poloniex.com/public?command=returnTicker"}
 
-var rtt_vExTm =map[string]int{
+var rtt_vExTm=map[string]int{
 	"CEX":	2,
 	"BTXt":	2,
 	"BTXs":	2,
 	"PLX":	3}
+
+var rtt_tickers []string

@@ -18,13 +18,73 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"strings"
+	"log"
+	"encoding/json"
+	"strconv"
 )
 
+type vCEX_json_dt_tk struct {
+	Vol string
+	Low string
+	Open string
+	High string
+	Last string
+	Buy string
+	Buy_amount string
+	Sell string
+	Sell_amount string
+}
+type vCEX_json_dt struct {
+	Date int64
+	Ticker map[string]vCEX_json_dt_tk
+}
+type vCEX_json struct {
+	Code int
+	Data vCEX_json_dt
+}
+
 func rTTparse_CEX(bdy []byte) {
-	//test ---
-	if ioutil.WriteFile(www_path+"rTT/ex_CEX_data",bdy,0644) == nil {
-		fmt.Println ("File written successfully: ex_CEX_data")
+
+	var jInf vCEX_json
+	json.Unmarshal(bdy, &jInf)
+
+	var pairArr=[]string{"BTC","USDT"}
+	var rslTkr []string
+	for _,v:=range rtt_tickers {
+		for _,p:=range pairArr {
+			if tckrLn:=rTT_CEX_getticker(v,p,jInf.Data.Ticker);tckrLn!="" {
+				rslTkr=append(rslTkr,tckrLn)
+			}
+		}
 	}
-	//--------
+
+	if err:=fl_wrtLines(rslTkr,www_path+"rTT/ex_CEX_tickers");err!=nil {
+		log.Fatalf("error, CEX tickers write: %s",err)
+	}
+	for _,v:=range rslTkr {
+		fmt.Println(v)
+	}
+
+}
+
+func rTT_CEX_getticker(name string,pair string,ticker map[string]vCEX_json_dt_tk) string {
+	if name==pair { return "" }
+	rslt:=""
+	if tckr,err:=ticker[name+pair];err {
+		tckrVol,_:=strconv.ParseFloat(tckr.Vol,64)
+		tckrLast,_:=strconv.ParseFloat(tckr.Last,64)
+		var rsltArr = []string{
+			pair+"_"+name,
+			"trading",
+			tckr.Last,
+			tckr.Sell,
+			tckr.Buy,
+			tckr.Low,
+			tckr.High,
+			strconv.FormatFloat(tckrVol*tckrLast,'f',8,64),
+			tckr.Vol}
+		rslt=strings.Join(rsltArr,"	")
+	}
+	return rslt
 }
