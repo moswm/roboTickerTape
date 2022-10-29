@@ -38,6 +38,7 @@ func main() {
 	mux5001.Handle("/"+proj_dir+"/",http.StripPrefix("/",fs))
 
 	go rTTmain()
+	go rTTbuffer()
 
 	ssl_en:=false
 	if _,err:=os.Stat(ssl_cert); err==nil {ssl_en=true}

@@ -34,3 +34,6 @@ var rtt_vExTm=map[string]int{
 	"PLX":	3}
 
 var rtt_tickers []string
+
+var rtt_TapeChOut chan string = make(chan string)
+var rtt_TapeChIn chan string = make(chan string)

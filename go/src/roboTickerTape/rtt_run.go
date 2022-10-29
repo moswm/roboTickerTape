@@ -59,7 +59,6 @@ func rTTmain() {
 		rtt_tickers=rLn
 	}
 
-	//chPbl=make(chan string,len(rtt_vExNm))
 	for ex,_:=range rtt_vExUrl {
 		go getEx(ex,rtt_vExTm[ex],rtt_vExUrl[ex])
 	}

@@ -18,7 +18,9 @@ package main
 
 const (
 	//system
-	www_path		= "/var/www/"
+//WORK: www_path		= "/var/www/"
+	www_path		= "/home/fatbob/0_SITES/0_WORK_BAEV/roboTickerTape/"
+// ====
 	proj_dir		= "roboTickerTape"
 	rqkey_path		= www_path
 	tpl_path		= www_path+"go/src/"+proj_dir+"/tpl/"
