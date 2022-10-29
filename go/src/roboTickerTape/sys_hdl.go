@@ -31,5 +31,5 @@ func hdl_redirect_home(w http.ResponseWriter, r *http.Request) {
 
 func hdl_5001(w http.ResponseWriter, r *http.Request) {
 	//start_index(w, r)
-	rtt_api_get()
+	rtt_api_get(w)
 }

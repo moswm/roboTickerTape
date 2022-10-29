@@ -17,14 +17,18 @@
 package main
 
 import (
+	"net/http"
 	"fmt"
 	"strconv"
 )
 
-func rtt_api_get() {
+func rtt_api_get(w http.ResponseWriter) {
 	// ===test===
-	for i:=1; i<50; i+=1 {
-		fmt.Println("==="+strconv.Itoa(i)+"======================="+<-rtt_TapeChOut)
+	fmt.Fprintf(w,"<!DOCTYPE html><html><body>===TEST 500 REQUESTS=======================<br />")
+	for i:=1; i<500; i+=1 {
+		fmt.Fprintf(w,"<br />==="+strconv.Itoa(i)+"=======================<br />"+<-rtt_TapeChOut)
+		//fmt.Println("==="+strconv.Itoa(i)+"======================="+<-rtt_TapeChOut)
 	}
+	fmt.Fprintf(w,"</body></html>")
 	// ==========
 }

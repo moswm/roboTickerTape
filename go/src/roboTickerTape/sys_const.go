@@ -18,8 +18,8 @@ package main
 
 const (
 	//system
-//WORK: www_path		= "/var/www/"
-	www_path		= "/home/fatbob/0_SITES/0_WORK_BAEV/roboTickerTape/"
+www_path		= "/var/www/"
+	
 // ====
 	proj_dir		= "roboTickerTape"
 	rqkey_path		= www_path
